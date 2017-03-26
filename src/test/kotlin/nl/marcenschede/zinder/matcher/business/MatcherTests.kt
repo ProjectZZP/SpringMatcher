@@ -18,7 +18,7 @@ class MatcherTests {
 
         val foundAccount = matcherApp.findAccountByMailAddress("id1")
 
-        assertThat(foundAccount.get().id, equalTo("id1"))
+        assertThat(foundAccount?.id, equalTo("id1"))
     }
 
     @Nested
@@ -55,7 +55,7 @@ class MatcherTests {
 
         @Test
         fun findAccountsBasedOnTags() {
-            val requestProfile = ProfileRequest.create("Spring", "TDD")
+            val requestProfile = ProfileRequest("Spring", "TDD")
 
             val matchingAccounts = matcherApp.findMatchingAccounts(requestProfile)
 
@@ -65,7 +65,7 @@ class MatcherTests {
 
         @Test
         fun matchingProfileNotFound() {
-            val requestProfile = ProfileRequest.create("Spring", "JUnit")
+            val requestProfile = ProfileRequest("Spring", "JUnit")
 
             val matchingAccounts = matcherApp.findMatchingAccounts(requestProfile)
 
@@ -74,7 +74,7 @@ class MatcherTests {
 
         @Test
         fun matchesMoreThanOneProfile() {
-            val requestProfile = ProfileRequest.create("tdd")
+            val requestProfile = ProfileRequest("tdd")
 
             val matchingAccounts = matcherApp.findMatchingAccounts(requestProfile)
 
